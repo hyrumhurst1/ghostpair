@@ -52,6 +52,12 @@ pnpm dev
 # visit http://localhost:3000 — banner appears, squiggly on line 3 after 500ms.
 ```
 
+## API routes
+
+- `POST /api/analyze` — body: `{ code, language }`. Streams `{line, issue, fix_suggestion}` JSON objects via SSE. 500-line cap (413 on overflow).
+- `POST /api/chat` — body: `{ code, language, messages }`. Streams free-form text responses.
+- `GET /api/mode` — returns `{ mock: boolean }` so the client can render the mock-mode banner without exposing env vars to the bundle.
+
 ## Constraints (v1)
 
 - **No code execution.** No sandboxing, no `eval`, no subprocess. AI analysis only. The "Run" button is disabled with a "(v2)" label.
